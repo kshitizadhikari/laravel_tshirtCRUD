@@ -19,3 +19,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [TshirtController::class, 'index']);
 Route::post('/save-batch',[TshirtController::class, 'store'] )->name('saveBatch');
 Route::get('/delete/{id}', [TshirtController::class, 'delete']);
+Route::get('/edit/{id}', [TshirtController::class, 'edit']);
+Route::post('/edit', [TshirtController::class, 'update'])->name('update');

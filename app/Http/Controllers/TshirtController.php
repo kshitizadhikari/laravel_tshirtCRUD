@@ -7,32 +7,13 @@ use Illuminate\Http\Request;
 
 class TshirtController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
         return view('welcome', ['list' => TshirtM::all()]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+  
     public function store(Request $request)
     {
         $tshirtObj = new TshirtM();
@@ -61,13 +42,22 @@ class TshirtController extends Controller
   
     public function edit($id)
     {
-        //
+        $tshirtObj = TshirtM::find($id);
+        return view('/editPage', ['data' => $tshirtObj]);
     }
 
    
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $tshirtObj = TshirtM::find($request->id);
+        $tshirtObj->BatchNo = $request->batchNo;
+        $tshirtObj->Qty = $request->qty;
+        $tshirtObj->createdAt = $request->createdAt;
+        $tshirtObj->Status = $request->status;
+        $tshirtObj->Remarks = $request->remarks;
+
+        $tshirtObj->save();
+        return redirect('/');
     }
 
     
